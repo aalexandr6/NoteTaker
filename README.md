@@ -4,6 +4,10 @@
 
 This project is a note-taking application that allows the user to create, save, and delete notes. The application uses an Express.js back end to save and retrieve notes.
 
+```bash
+npm start
+```
+
 ## Criteria
 
 ```bash

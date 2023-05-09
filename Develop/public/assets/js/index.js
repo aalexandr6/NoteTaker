@@ -1,9 +1,10 @@
+// Dependencies
 let noteTitle;
 let noteText;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
-
+// let noteListItems = [];
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
@@ -32,7 +33,7 @@ const getNotes = () =>
       'Content-Type': 'application/json',
     },
   });
-
+//save note
 const saveNote = (note) =>
   fetch('/api/notes', {
     method: 'POST',
@@ -41,7 +42,7 @@ const saveNote = (note) =>
     },
     body: JSON.stringify(note),
   });
-
+//delete note
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
     method: 'DELETE',
@@ -49,7 +50,7 @@ const deleteNote = (id) =>
       'Content-Type': 'application/json',
     },
   });
-
+//show active note
 const renderActiveNote = () => {
   hide(saveNoteBtn);
 
@@ -65,7 +66,7 @@ const renderActiveNote = () => {
     noteText.value = '';
   }
 };
-
+//get and render notes
 const handleNoteSave = () => {
   const newNote = {
     title: noteTitle.value,
@@ -87,8 +88,8 @@ const handleNoteDelete = (e) => {
 
   if (activeNote.id === noteId) {
     activeNote = {};
-  }
-
+  }//console log note id
+console.log(noteId);
   deleteNote(noteId).then(() => {
     getAndRenderNotes();
     renderActiveNote();
@@ -108,6 +109,7 @@ const handleNewNoteView = (e) => {
   renderActiveNote();
 };
 
+//save button
 const handleRenderSaveBtn = () => {
   if (!noteTitle.value.trim() || !noteText.value.trim()) {
     hide(saveNoteBtn);
@@ -129,7 +131,8 @@ const renderNoteList = async (notes) => {
   const createLi = (text, delBtn = true) => {
     const liEl = document.createElement('li');
     liEl.classList.add('list-group-item');
-
+//span element
+//Span element is used to group inline-elements in a document.
     const spanEl = document.createElement('span');
     spanEl.classList.add('list-item-title');
     spanEl.innerText = text;
